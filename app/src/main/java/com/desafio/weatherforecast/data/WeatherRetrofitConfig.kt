@@ -7,8 +7,7 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-var OPEN_WEATHER_BASE_API = "http://api.openweathermap.org/data/2.5/"
-
+var OPEN_WEATHER_BASE_API = "https://api.openweathermap.org/data/2.5/"
 
 object RetrofitConfig {
     var retrofit :Retrofit? = null
