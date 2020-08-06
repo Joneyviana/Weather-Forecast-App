@@ -7,12 +7,16 @@ import com.desafio.weatherforecast.data.WeatherRepository
 import com.desafio.weatherforecast.data.models.Forecast
 
 class WeatherForecastViewModel : AndroidViewModel {
-     var weatherRepository:WeatherRepository
-     constructor(application: Application):super(application){
-        weatherRepository = WeatherRepository(application)
-     }
+    var forecastLiveData: MutableLiveData<Forecast>? = null
+    var weatherRepository: WeatherRepository
 
-     fun getForeCast(lat:Double,long:Double):MutableLiveData<Forecast>{
-        return weatherRepository.forecast7Days(lat,long)
+    constructor(application: Application) : super(application) {
+        weatherRepository = WeatherRepository(application)
+    }
+
+    fun getForeCast(lat: Double, long: Double): MutableLiveData<Forecast> {
+        if (forecastLiveData == null)
+            forecastLiveData = weatherRepository.forecast7Days(lat, long)
+        return forecastLiveData!!
     }
 }
