@@ -1,5 +1,6 @@
 package com.desafio.weatherforecast.data
 
+import android.app.Application
 import android.content.Context
 import com.desafio.weatherforecast.data.network.CacheManager
 import com.desafio.weatherforecast.data.network.hasNetwork
@@ -11,7 +12,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 
 var OPEN_WEATHER_BASE_API = "https://api.openweathermap.org/data/2.5/"
-var WEATHER_API = System.getenv("WEATHER_API")
+var WEATHER_API = "c1b96a3e9b454d188ae398b3184aa0f8"
 object RetrofitConfig {
     var retrofit :Retrofit? = null
     fun getRetrofit(context: Context):Retrofit{
@@ -25,8 +26,8 @@ object RetrofitConfig {
         return retrofit!!
     }
 
-    fun getWeatherService(context: Context):WeatherService{
-        return getRetrofit(context).create(WeatherService::class.java)
+    fun getWeatherService(application: Application):WeatherService{
+        return getRetrofit(application).create(WeatherService::class.java)
     }
 
     private fun getHttpWithApiKey(request: Request):HttpUrl{

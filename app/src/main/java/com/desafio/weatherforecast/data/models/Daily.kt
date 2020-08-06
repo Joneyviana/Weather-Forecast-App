@@ -15,6 +15,6 @@ data class Daily (
 	val wind_deg : Int,
 	val weather : List<Weather>,
 	val clouds : Int,
-	val pop : Int,
+	val pop : Double,
 	val uvi : Double
 )
