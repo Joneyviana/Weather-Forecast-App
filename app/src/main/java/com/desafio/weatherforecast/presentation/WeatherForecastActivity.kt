@@ -1,7 +1,10 @@
 package com.desafio.weatherforecast.presentation
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -17,12 +20,31 @@ class WeatherForecastActivity : AppCompatActivity() {
         setContentView(R.layout.activity_weather_forecast)
         weatherForecastViewModel = ViewModelProvider(this)
             .get(WeatherForecastViewModel::class.java)
+
         weatherForecastViewModel?.getForeCast(21.7627, -41.3244)?.observe(this,
             Observer {
-                val weatherForecastAdapter = WeatherForecastAdapter(it.daily)
-                var recyclerView = findViewById<View>(R.id.forecast_recyclerview) as RecyclerView
-                recyclerView.layoutManager = LinearLayoutManager(this)
-                recyclerView.adapter = weatherForecastAdapter
+                if(it == null){
+                    showDialogError("Request Error","Couldn't return to predictions")
+                }
+                else {
+                    val weatherForecastAdapter = WeatherForecastAdapter(it.daily)
+                    var recyclerView =
+                        findViewById<View>(R.id.forecast_recyclerview) as RecyclerView
+                    recyclerView.layoutManager = LinearLayoutManager(this)
+                    recyclerView.adapter = weatherForecastAdapter
+                }
             })
+    }
+
+    fun showDialogError(title:String,message:String){
+            var alertDialog: AlertDialog.Builder = AlertDialog.Builder(this)
+            alertDialog.setTitle(title);
+            alertDialog.setMessage(message);
+        alertDialog.setPositiveButton(android.R.string.yes) { _,_ ->
+            Toast.makeText(applicationContext,
+                android.R.string.yes, Toast.LENGTH_SHORT).show()
+
+        }
+        alertDialog.show();
     }
 }
