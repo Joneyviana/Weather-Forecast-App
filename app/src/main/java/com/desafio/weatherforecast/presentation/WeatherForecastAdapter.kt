@@ -24,25 +24,33 @@ class WeatherForecastAdapter(private val daily: List<Daily>) :
     }
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         var day_forecast = daily[position]
-        var temp = day_forecast.temp
-        var weather = day_forecast.weather[0]
         var view = holder.view
+        setTempInfo(view,day_forecast)
+        setWeatherInfo(view,day_forecast)
+        view.date_format.text = day_forecast.getFormatDate()
+        view.city.text = "Campos dos Goytacazes"
+    }
+
+    fun setTempInfo(view:View,daily: Daily){
+        var temp = daily.temp
         view.temp_min.text = temp.getMin()
         view.temp_day.text = temp.getDay()
         view.temp_max.text = temp.getMax()
-        view.weatherDescription.text = weather.description
+    }
+
+    fun setWeatherInfo(view:View,daily: Daily){
+        var weather = daily.weather[0]
         view.weatherMain.text = weather.main
-        view.date_format.text = day_forecast.getFormatDate()
+        view.weatherDescription.text = weather.description
         setWeatherIcon(view,weather)
     }
 
     fun setWeatherIcon(view:View,weather: Weather){
-        Log.i("URL DA IMAGEM!","http://openweathermap.org/img/wn/${weather.icon}@2x.png")
         Glide
             .with(view.context)
             .load(weather.getIconUrl())
             .centerCrop()
-            .placeholder(R.drawable.ic_launcher_background)
+            .placeholder(R.drawable.ic_placeholder_foreground)
             .into(view.weatherIcon);
     }
     override fun getItemCount() = daily.size

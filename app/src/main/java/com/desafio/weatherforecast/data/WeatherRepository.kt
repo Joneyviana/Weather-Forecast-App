@@ -1,6 +1,7 @@
 package com.desafio.weatherforecast.data
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.desafio.weatherforecast.data.models.Forecast
 import retrofit2.Call
@@ -15,6 +16,7 @@ class WeatherRepository {
     }
 
     fun forecast7Days(lat:Double,lon:Double):MutableLiveData<Forecast>{
+       Log.i("REQUEST","fez a request")
        weatherService.forecast7Days(lat,lon).enqueue(object : Callback<Forecast> {
            override fun onFailure(call: Call<Forecast>?, t: Throwable?) {
                forecastResult.postValue(null)
