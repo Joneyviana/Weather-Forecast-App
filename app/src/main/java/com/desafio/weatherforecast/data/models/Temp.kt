@@ -8,4 +8,16 @@ data class Temp (
 	val night : Double,
 	val eve : Double,
 	val morn : Double
-)
+){
+	fun getMin():String{
+		return "min: ${min}ºC"
+	}
+
+	fun getDay():String{
+		return "day: ${day}ºC"
+	}
+
+	fun getMax():String{
+		return "max: ${max}ºC"
+	}
+}

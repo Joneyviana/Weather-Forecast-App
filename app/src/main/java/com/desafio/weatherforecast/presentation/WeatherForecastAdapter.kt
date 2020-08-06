@@ -25,11 +25,15 @@ class WeatherForecastAdapter(private val daily: List<Daily>) :
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         var day_forecast = daily[position]
         var temp = day_forecast.temp
+        var weather = day_forecast.weather[0]
         var view = holder.view
-        view.temp_min.text = temp.min.toString()
-        view.temp_day.text = temp.day.toString()
-        view.temp_max.text = temp.max.toString()
-        setWeatherIcon(view,day_forecast.weather[0])
+        view.temp_min.text = temp.getMin()
+        view.temp_day.text = temp.getDay()
+        view.temp_max.text = temp.getMax()
+        view.weatherDescription.text = weather.description
+        view.weatherMain.text = weather.main
+        view.date_format.text = day_forecast.getFormatDate()
+        setWeatherIcon(view,weather)
     }
 
     fun setWeatherIcon(view:View,weather: Weather){
@@ -41,7 +45,5 @@ class WeatherForecastAdapter(private val daily: List<Daily>) :
             .placeholder(R.drawable.ic_launcher_background)
             .into(view.weatherIcon);
     }
-
-    // Return the size of your dataset (invoked by the layout manager)
     override fun getItemCount() = daily.size
 }
