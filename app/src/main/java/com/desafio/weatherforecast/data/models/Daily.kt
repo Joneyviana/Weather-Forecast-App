@@ -1,5 +1,7 @@
 package com.desafio.weatherforecast.data.models
 
+import com.desafio.weatherforecast.utils.getDate
+
 
 data class Daily (
 
@@ -17,4 +19,8 @@ data class Daily (
 	val clouds : Int,
 	val pop : Double,
 	val uvi : Double
-)
+){
+	fun getFormatDate():String{
+		return getDate(dt*1000.toLong(),"dd MMMM yyyy")
+	}
+}
