@@ -18,7 +18,7 @@ fun hasNetwork(context: Context): Boolean {
             else -> false
         }
     } else {
-        val nwInfo = connectivityManager.activeNetworkInfo ?: return false
+        val nwInfo = connectivityManager.activeNetworkInfo?: return false
         return nwInfo.isConnected
     }
 }
