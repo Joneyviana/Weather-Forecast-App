@@ -16,9 +16,9 @@ class WeatherForecastAdapter(private val daily: List<Daily>) :
 
     override fun onCreateViewHolder(parent: ViewGroup,
                                     viewType: Int): WeatherForecastAdapter.MyViewHolder {
-        val textView = LayoutInflater.from(parent.context)
+        val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.card_forecast, parent, false)
-        return MyViewHolder(textView)
+        return MyViewHolder(view)
     }
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         var day_forecast = daily[position]
